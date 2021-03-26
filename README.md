@@ -1,2 +1,2 @@
 # URLShortener
-URL Shortener to practive fremp stack
+URL Shortener to practice fremp stack
