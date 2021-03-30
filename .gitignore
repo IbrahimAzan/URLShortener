@@ -1,0 +1,3 @@
+#Ignore Python's virtual environment
+server/venv/
+server/__pycache__
