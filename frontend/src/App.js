@@ -12,9 +12,9 @@ import NotFound from './NotFound.js';
 function App() {
   return (
     <Router>
-      <div className="App App-header">
-        <nav >
-          EASY URL
+      <div className="App">
+        <nav className="App-header">
+          <span>EASY URL</span>
         </nav>
         <Switch>
           <Route path="/404">
