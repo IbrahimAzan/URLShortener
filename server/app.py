@@ -1,4 +1,4 @@
-from flask import Flask, redirect, request, jsonify
+from flask import Flask, redirect, request, jsonify, send_from_directory
 import pymongo 
 import os
 import random
@@ -8,7 +8,7 @@ from flask_cors import CORS
 COLLECTION_NAME = "urls"
 DATABASE_NAME = "urls-DB"
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 
 if app.debug: #enable Cross Origin Resource Sharing only in debug mode to allow easy testing in localhost
     CORS(app)
@@ -17,6 +17,13 @@ connectionString = os.getenv("URL_DB_CONNECTION")
 mongoClient = pymongo.MongoClient(connectionString) # Connect the mongo client
 db = mongoClient[DATABASE_NAME]
 col = db[COLLECTION_NAME]
+
+"""
+    SERVE HOME PAGE
+"""
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
 """
     method: GET
