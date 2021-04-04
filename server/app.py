@@ -3,12 +3,18 @@ import pymongo
 import os
 import random
 import string
+from flask_cors import CORS
 
 COLLECTION_NAME = "urls"
 DATABASE_NAME = "urls-DB"
 
 app = Flask(__name__)
-mongoClient = pymongo.MongoClient(os.environ.get('URL_DB_CONNECTION'))#os.environ.get('URL_DB_CONNECTION')) # Connect the mongo client
+
+if app.debug: #enable Cross Origin Resource Sharing only in debug mode to allow easy testing in localhost
+    CORS(app)
+
+connectionString = os.getenv("URL_DB_CONNECTION")
+mongoClient = pymongo.MongoClient(connectionString) # Connect the mongo client
 db = mongoClient[DATABASE_NAME]
 col = db[COLLECTION_NAME]
 
@@ -39,6 +45,7 @@ def get_url(path):
 def submit_url():
    link = request.args['url']
    path = generateRandomPath()
+
    try: 
        #check if path aleardy exists in db
         while (col.find_one({"path": path})):
@@ -48,7 +55,7 @@ def submit_url():
 
         return path
    except:
-       return "Error submitting url, Please try again"    
+       return "Error submitting url, Please try again"
 
 """
     Generate a random string of size 6 containing number, lower and upper case characters

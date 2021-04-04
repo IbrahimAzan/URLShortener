@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 class Home extends React.Component {
@@ -34,7 +33,7 @@ class Home extends React.Component {
         let regexResult = link.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
         if (regexResult === null) {
             error = "Please enter a valid URL";
-            this.setState({ error: error});
+            this.setState({ error: error });
             return false;
         }
 
@@ -43,22 +42,37 @@ class Home extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({ link: event.target.value });
+        this.setState({ link: event.target.value, error: "" });
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         if (this.handleValidation()) {
-            alert("URL Submitted: " + this.state.link);
+            let url = this.state.link;
+            await fetch('http://127.0.0.1:5000/submit_url?url='+url, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'text/plain',
+                    'Content-Type': 'text/plain'
+                }
+            }).then(function (response) {
+                return response.text();
+            }).then(data => {
+                let shortLink = "http://ez-url.com/" + data;
+                this.setState({ link: shortLink });
+            }).catch(function (error) {
+                alert("API ERROR: " + error)
+            });
         }
     }
 
     render() {
         return (
             <div class="form-group">
+                Enter your URL and share the short link, its that easy :)
                 <form>
-                    <input type="text" placeholder="https://google.ca" id="url" name="url" value={this.state.link} onChange={this.handleChange} />
-                    <input type="button" value="Shorten" onClick={this.handleSubmit} />
+                    <input className="text-field" type="text" placeholder="https://google.ca" id="url" name="url" value={this.state.link} onChange={this.handleChange} />
+                    <input className="btn" type="button" value="Shorten" onClick={this.handleSubmit} />
                 </form>
                 <span className="error">{this.state.error}</span>
             </div>

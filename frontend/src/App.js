@@ -14,7 +14,7 @@ function App() {
     <Router>
       <div className="App">
         <nav className="App-header">
-          <span>EASY URL</span>
+          <h1>EASY URL</h1>
         </nav>
         <Switch>
           <Route path="/404">

@@ -1,18 +1,56 @@
 .App {
-  text-align: top;
-  background-color: #455066;
+  background-color: rgb(231, 226, 238);
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  justify-content: center;
-  font-size: calc(20px + 2vmin);
-  color: rgb(245, 241, 241);
+nav {
+  color: rgb(167, 109, 190);
+  text-align: center;
+  padding-top: 100px;
+  height: 100px;
+  font-size: xx-large;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.App-link {
-  color: #61dafb;
+.form-group {
+  margin: auto;
+  width: 90%;
+  padding: 10px;
+  text-align: center;
+  color:rgb(167, 109, 190);
+  font-size: 20px;
+}
+
+form {
+  margin-top: 2%;
+}
+
+.text-field {
+  width: 50%;
+  margin-right: 2%;
+  border-radius: 8px 8px 8px 8px;
+  height: 40px;
+  font-size: large;
+}
+
+.btn {
+  background-color: rgb(167, 109, 190);
+  width: 30%;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 20px;
+  height: 40px;
+  color: aliceblue;
+}
+
+.btn:hover{
+  background-color: rgb(185, 142, 214);
+}
+
+.error {
+  color: red;
+  font-size: x-large; 
+}
+
+.not-found {
+  text-align: center;
+  color:rgb(167, 109, 190);
 }
